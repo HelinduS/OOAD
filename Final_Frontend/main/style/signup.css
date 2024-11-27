@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 30px;
+    font-family: 'Sofia', sans-serif; 
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  
+  input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+  }
+  
+  
+  button {
+    background-color: #705206;
+    color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .cancelbtn, .signupbtn {
+    width: 48%; 
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  
+  .cancelbtn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .cancelbtn:hover {
+    background-color: #e53935;
+  }
+  
+  
+  .signupbtn {
+    background-color: #704214; 
+    color: white;
+  }
+  
+  .signupbtn:hover {
+    background-color: #9c9042;
+  }
+  
+  
+  a {
+    color: dodgerblue;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  
+  #error-message {
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+    font-size: 12px;
+  }
+  
+  
+  @media screen and (max-width: 600px) {
+    .container {
+      padding: 20px;
+    }
+    
+    
+    .button-container {
+      flex-direction: column;
+    }
+  
+    .cancelbtn, .signupbtn {
+      width: 100%; 
+      margin: 5px 0;
+    }
+  }
