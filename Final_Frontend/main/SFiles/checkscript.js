@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const checkoutGrid = document.getElementById('checkoutGrid');
     const totalPriceElement = document.getElementById('totalPrice');
+    const checkoutForm = document.getElementById('checkoutForm');
 
     // Load cart from localStorage
     let cart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create table header
         const thead = document.createElement('thead');
-        thead.innerHTML = `
+        thead.innerHTML = ` 
             <tr>
                 <th>Image</th>
                 <th>Product Name</th>
@@ -43,9 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             // Ensure quantity defaults to 1 if undefined or invalid
             item.quantity = item.quantity && item.quantity > 0 ? item.quantity : 1;
-        
+
             const row = document.createElement('tr');
-        
+
             row.innerHTML = `
                 <td><img src="${item.imageUrl}" alt="${item.productName}" style="width: 50px; height: 50px;"></td>
                 <td>${item.productName}</td>
@@ -55,10 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td class="subtotal">${(item.price * item.quantity).toFixed(2)}</td>
             `;
-        
+
             tbody.appendChild(row);
         });
-        
+
         table.appendChild(tbody);
         checkoutGrid.appendChild(table);
 
@@ -88,6 +89,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
             calculateTotalPrice();
         }
+    });
+
+    // Handle form submission
+    checkoutForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const userId = document.getElementById('customerId').value.trim();
+        const totalPrice = parseFloat(totalPriceElement.textContent);
+        const productNames = cart.map(item => item.productName).join(', ');
+
+        // Validate user input
+        if (!userId) {
+            alert("Please enter your User ID.");
+            return;
+        }
+
+        // Prepare the order data
+        const orderData = {
+            customerId: userId,
+            description: `Total Price: LKR ${totalPrice}, Products: ${productNames}`,
+            status: 'pending'
+        };
+
+        // Send data to backend
+        fetch('http://localhost:8080/order/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        })
+            .then(response => {
+                const contentType = response.headers.get('Content-Type');
+                if (response.ok) {
+                    if (contentType && contentType.includes('application/json')) {
+                        return response.json();
+                    }
+                    return response.text(); 
+                }
+                throw new Error('Failed to create order');
+            })
+            .then(data => {
+                // Check if the response is a string 
+                if (typeof data === 'string') {
+                    alert(data); // Show the message
+                } else {
+                    alert(`Order placed successfully! Order ID: ${data.orderId}`);
+                    // Clear the cart and remove it from localStorage
+                cart = []; // Reset the cart array
+                localStorage.removeItem('checkoutCart'); // Remove cart from localStorage
+                }
+                 // Clear the cart and remove it from localStorage
+                cart = []; // Reset the cart array
+                localStorage.removeItem('checkoutCart'); // Remove cart from localStorage
+
+                // Optionally, re-render checkout (but it should be empty now)
+                renderCheckout();
+
+                // Redirect to the empty cart page
+                window.location.href = 'cart.html'; // Directly redirect to the cart page (empty cart)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to place the order. Please try again.');
+            });
     });
 
     // Initial render

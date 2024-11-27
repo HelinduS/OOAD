@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
     <title>Checkout</title>
-    <link rel="stylesheet" href="style/checkout.css">
+    
     <script src="SFiles/checkscript.js" defer></script>
 </head>
 <body>
     <h1>Checkout</h1>
     <form id="checkoutForm">
+        <!-- User ID input section -->
+        <div id="userIdSection">
+            <label for="userId"><strong>User ID:</strong></label>
+            <input type="text" id="customerId" name="customerId" placeholder="Enter your User ID" required>
+        </div>
+
         <div id="checkoutGrid">
             <!-- Cart items will be dynamically loaded here -->
         </div>
