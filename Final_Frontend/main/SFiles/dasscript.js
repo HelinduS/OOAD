@@ -16,26 +16,80 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     loadCustomers();
+    
+    loadProductCount();
 
+    loadOrdertCount();
+
+    loadCustomerCount();
     
     window.addDelivery = addDelivery;
-
     
+});
+
+function loadProductCount() {
     fetch('http://localhost:8080/api/products/count')
-        .then(response => response.json()) 
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch product count');
+            }
+            return response.json();
+        })
         .then(data => {
-            
+            // If backend returns a plain number:
             if (typeof data === 'number') {
                 document.getElementById('product-count').textContent = data;
             }
-            
+            // If backend wraps it as { count: <number> }:
             else if (data.count !== undefined) {
                 document.getElementById('product-count').textContent = data.count;
             }
         })
         .catch(error => console.error('Error fetching product count:', error));
-});
+}
 
+function loadOrdertCount() {
+    fetch('http://localhost:8080/order/count')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch product count');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // If backend returns a plain number:
+            if (typeof data === 'number') {
+                document.getElementById('order-count').textContent = data;
+            }
+            // If backend wraps it as { count: <number> }:
+            else if (data.count !== undefined) {
+                document.getElementById('order-count').textContent = data.count;
+            }
+        })
+        .catch(error => console.error('Error fetching product count:', error));
+}
+
+
+function loadCustomerCount() {
+    fetch('http://localhost:8080/customer/count')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch product count');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // If backend returns a plain number:
+            if (typeof data === 'number') {
+                document.getElementById('user-count').textContent = data;
+            }
+            // If backend wraps it as { count: <number> }:
+            else if (data.count !== undefined) {
+                document.getElementById('user-count').textContent = data.count;
+            }
+        })
+        .catch(error => console.error('Error fetching product count:', error));
+}
 function loadCustomers() {
     fetch("http://localhost:8080/customer/all") 
         .then(response => {

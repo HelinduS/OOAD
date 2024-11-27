@@ -36,6 +36,7 @@ public class CustomerService {
         customer.setLoginInfo(loginInfo);
 
 
+
         return customerRepository.save(customer);
     }
 

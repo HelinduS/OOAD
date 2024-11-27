@@ -59,7 +59,7 @@ public class OrderService {
 
         if (existingOrder != null) {
             existingOrder.setStatus(status);
-            smsService.sendSms("+94725263276", "Your order is  " + status);
+            smsService.sendSms("+94711983118", "Your order is  " + status);
             return orderRepository.save(existingOrder);
         } else {
             return null;

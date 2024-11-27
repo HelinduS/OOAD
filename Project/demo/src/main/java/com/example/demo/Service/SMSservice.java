@@ -13,8 +13,8 @@ public class SMSservice {
 
     public SMSservice(){
         this.vonageClient = VonageClient.builder()
-                .apiKey("14931901")
-                .apiSecret("1l3QHxPMguBQp75F")
+                .apiKey("89945a2f")
+                .apiSecret("Nk0LxG6zDCBLR58m")
                 .build();
     }
 

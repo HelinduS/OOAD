@@ -100,7 +100,7 @@ public class DeliveryService {
 
 
             try {
-                String response = smsService.sendSms("+94725263276", "Your delivery is  " + status);
+                String response = smsService.sendSms("+94711983118", "Your delivery is  " + status);
                 System.out.println("SMS Response: " + response);
             } catch (Exception e) {
                 System.err.println("Failed to send SMS: " + e.getMessage());

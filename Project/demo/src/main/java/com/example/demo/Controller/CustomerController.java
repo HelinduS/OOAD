@@ -19,8 +19,8 @@ public class CustomerController {
     @PostMapping("/create")
     public ResponseEntity<String> createCustomer(@RequestBody CustomerDTO customerDTO) {
         Customer savedCustomer = customerService.saveCustomer(customerDTO);
-        int customerId = savedCustomer.getId(); // Get the generated ID
-        return ResponseEntity.ok("Customer created successfully. Your User ID is: " + customerId);
+        String userName = savedCustomer.getUserName(); // Get the generated ID
+        return ResponseEntity.ok("Account created successfully.Welcome to AWT Cinnamon " + userName);
     }
 
     @GetMapping("/find")

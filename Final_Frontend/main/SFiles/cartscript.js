@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cartGrid = document.querySelector('.cart-grid');
     const clearCartButton = document.getElementById('clearCart');
+    const proceedButton = document.getElementById('proceed');
 
     // Load cart from localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -53,5 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
         cart = [];
         renderCart();
         alert('Cart cleared!');
+    });
+
+    // Proceed to checkout
+    proceedButton.addEventListener('click', () => {
+        localStorage.setItem('checkoutCart', JSON.stringify(cart));
+        window.location.href = 'checkout.html';
     });
 });
